@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Invitation with Image Slider</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+            background-color: #fdf6e3;
+        }
+
+        /* Slider Container */
+        .slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2;
+        }
+
+        .slider-images {
+            display: flex;
+            width: 1000%; /* 10 images x 100% each */
+            animation: slide 20s infinite;
+        }
+
+        .slider-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+    14.285% { transform: translateX(0); } /* 7s for the first image */
+    28.57% { transform: translateX(-10%); } /* 7s for the second image */
+    42.855% { transform: translateX(-20%); } /* 7s for the third image */
+    57.14% { transform: translateX(-30%); } /* 7s for the fourth image */
+    71.425% { transform: translateX(-40%); } /* 7s for the fifth image */
+    85.71% { transform: translateX(-50%); } /* 7s for the sixth image */
+    100% { transform: translateX(-90%); } /* Last image */
+        }
+
+        /* Letter Container */
+        .letter-container {
+            display: none;
+            position: relative;
+            width: 70%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #ffffff;
+           
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            line-height: 1.6;
+            opacity: 0;
+            animation: unfold 1s ease forwards, fadeInText 1s ease 1s forwards;
+           
+    border: 2px solid #2b7a78; /* Deep teal for elegance */
+    color: #333333;
+        }
+
+        /* Letter Animations */
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes unfold {
+            from {
+                transform: scaleY(0);
+            }
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        .letter-content p {
+            margin: 10px 0;
+            color: #2b7a78; /* Deep teal for links */
+    text-decoration: underline;
+        }
+
+        /* Body click handler */
+        body {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onclick="toggleLetter()">
+    <!-- Image Slider -->
+    <div class="slider">
+        <div class="slider-images">
+            <img src="picsd/avec.jpeg" alt="Image 1">
+            <img src="picsd/caca.jpeg" alt="Image 2">
+            <img src="picsd/juicy.jpeg" alt="Image 3">
+            <img src="picsd/une.jpeg" alt="Image 4">
+            <img src="picsd/up.jpeg" alt="Image 5">
+            <img src="picsd/plumped.jpeg" alt="Image 6">
+            <img src="picsd/pipi.jpeg" alt="Image 7">
+            <img src="picsd/mange.jpeg" alt="Image 8">
+            <img src="picsd/okok.jpeg" alt="Image 9">
+            <img src="picsd/thegreens.PNG" alt="Image 10">
+        </div>
+    </div>
+
+    <!-- Letter Container -->
+    <div class="letter-container" id="letter-container">
+        <div class="letter-content" id="letter-content">
+            <p style="text-align: left;">Club de Citoyenneté MADINA</p>
+            <p style="text-align: right;">10/11/2024</p>
+            <p style="text-align: center;">Collège MADINA SCHOOLS</p>
+            <p style="text-align: center;">MADAME LA DIRECTRICE<br>Collège MADINA SCHOOLS</p>
+            <br>
+            <p>Madame la Directrice,</p>
+            <p>Je me permets de vous écrire pour vous inviter à assister à un tweet matinal qui se tiendra le jeudi 14 novembre 2024 à partir de 8h00 pour commémorer la Marche Verte. Cet événement vise à honorer cet épisode historique et à rappeler les valeurs de solidarité et d'unité qu'il représente.</p>
+            <p>Ce moment d’échange permettra à notre communauté scolaire de partager des réflexions et de rappeler l'importance de la Marche Verte dans l'histoire de notre pays. Nous serions très honorés de votre présence et de vos interventions, qui apporteront sans aucun doute une perspective enrichissante pour nous tous.</p>
+            <p>Dans l'attente de votre réponse favorable, je vous prie d'agréer, Madame la Directrice, l'expression de mes salutations respectueuses.
+                Veillez confirmer votre presence sur cette adress <a href="mailto:ho.kheiri@madina.ma">ho.kheiri@madina.ma</a>.
+            </p>
+            <p>Représentant du Club de Citoyenneté</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleLetter() {
+            const letterContainer = document.getElementById("letter-container");
+
+            if (letterContainer.style.display === "none" || !letterContainer.style.display) {
+                letterContainer.style.display = "block";
+                letterContainer.style.opacity = "1";
+                triggerConfetti();
+            } else {
+                letterContainer.style.display = "none";
+            }
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
+</body>
+</html>
